@@ -6,26 +6,37 @@
     <title>Visualisation des données</title>
   </head>
   <body>
-    <h1>Request</h1>
-    <pre>
-        SELECT ?film ?filmLabel ?publication_date ?genreLabel ?country_of_originLabel ?duration WHERE {
-            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
-            ?film wdt:P31 wd:Q11424.
-            OPTIONAL { ?film wdt:P136 ?genre. }
-            OPTIONAL { ?film wdt:P495 ?country_of_origin. }
-            OPTIONAL { ?film wdt:P577 ?publication_date. }
-            OPTIONAL { ?film wdt:P2047 ?duration. }
-          }
-          LIMIT 100
-    </pre>
+    <h1>Film</h1>
 
+    <p>Code de la requête en SPARQL Wikidata</p>
+    <p>
+      <code>
+        <pre>
+            #defaultView:Timeline
+            SELECT ?film ?filmLabel ?publication_date ?country_of_originLabel ?duration ?genreLabel ?image WHERE {
+              SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+              ?film wdt:P31 wd:Q11424.
+              OPTIONAL { ?film wdt:P495 ?country_of_origin. }
+              OPTIONAL { ?film wdt:P577 ?publication_date. }
+              OPTIONAL { ?film wdt:P2047 ?duration. }
+              OPTIONAL { ?film wdt:P136 ?genre. }
+              OPTIONAL { ?film wdt:P18 ?image. }
+              FILTER EXISTS { ?film wdt:P18 [] }
+            }
+            LIMIT 100
+        </pre>
+      </code>
+    </p>
     <div style="display: flex; justify-content: center; align-items: center">
       <iframe
-        style="width: 90vw; height: 70vh; border: none"
-        src="https://query.wikidata.org/embed.html#SELECT%20%3Ffilm%20%3FfilmLabel%20%3Fpublication_date%20%3FgenreLabel%20%3Fcountry_of_originLabel%20%3Fduration%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20%3Ffilm%20wdt%3AP31%20wd%3AQ11424.%0A%20%20OPTIONAL%20%7B%20%3Ffilm%20wdt%3AP136%20%3Fgenre.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Ffilm%20wdt%3AP495%20%3Fcountry_of_origin.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Ffilm%20wdt%3AP577%20%3Fpublication_date.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Ffilm%20wdt%3AP2047%20%3Fduration.%20%7D%0A%7D%0ALIMIT%20100"
+        style="width: 80vw; height: 50vh; border: none"
+        src="https://query.wikidata.org/embed.html#%23defaultView%3ATimeline%0ASELECT%20%3Ffilm%20%3FfilmLabel%20%3Fpublication_date%20%3Fcountry_of_originLabel%20%3Fduration%20%3FgenreLabel%20%3Fimage%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20%3Ffilm%20wdt%3AP31%20wd%3AQ11424.%0A%20%20OPTIONAL%20%7B%20%3Ffilm%20wdt%3AP495%20%3Fcountry_of_origin.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Ffilm%20wdt%3AP577%20%3Fpublication_date.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Ffilm%20wdt%3AP2047%20%3Fduration.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Ffilm%20wdt%3AP136%20%3Fgenre.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Ffilm%20wdt%3AP18%20%3Fimage.%20%7D%0A%20%20FILTER%20EXISTS%20%7B%20%3Ffilm%20wdt%3AP18%20%5B%5D%20%7D%0A%7D%0ALIMIT%20100"
         referrerpolicy="origin"
         sandbox="allow-scripts allow-same-origin allow-popups"
       ></iframe>
     </div>
+
+    <p>Graphe RawGraph</p>
+    <img src="./viz.svg" />
   </body>
 </html>
