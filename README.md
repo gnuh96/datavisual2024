@@ -1,4 +1,4 @@
-# Indexation File - Projet Technique Informatique & Web
+# Visualisation des données - Exo1
 
 Ce projet fait partie du module Visualisation des données.
 
